@@ -21,7 +21,7 @@ import javax.inject.Named;
  * @author Alicia Fernández
  */
 
-@Named(value = "accionnista")
+@Named(value = "accionista")
 @SessionScoped 
 public class AccionistaController implements Serializable{
     
