@@ -8,6 +8,7 @@ package com.asaescla.controller;
 import com.asaescla.ejb.AccionistasFacadeLocal;
 import com.asaescla.entity.Accionistas;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -31,6 +32,7 @@ public class AccionistaController implements Serializable{
     private List<Accionistas> list_DataObject;
     private Accionistas model;
     private Boolean isEdit;
+    private Boolean isError = false;
     
      // <editor-fold defaultstate="collapsed" desc="get/set">
     // Se puede autogenerar metodos get/set por medio de netbeans, click derecho, y selecionar "Insert Code", luego "Getter/Setter" y seleccionar los atributos que se necesaitan
@@ -119,6 +121,9 @@ public class AccionistaController implements Serializable{
         try { 
             isEdit = false;
             model = new Accionistas();
+            
+            Date dateNow = new Date();
+            model.setFecharegistro(dateNow);
         } catch (Exception e) {}
     }
     
@@ -126,6 +131,9 @@ public class AccionistaController implements Serializable{
     public void onClickProcessAccionista(){
         try {
             String sms = "";
+            
+            isValid();
+            
             if(isEdit) {
                 facadeaccionistas.edit(model);
                 sms = "Se edito correctamente";
@@ -137,8 +145,24 @@ public class AccionistaController implements Serializable{
             cleanAll();
             load_listAccionista(); // Se actualizara la lista desde la base
             FacesContext.getCurrentInstance().addMessage("msj", new FacesMessage(FacesMessage.SEVERITY_INFO, sms, ""));
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            if(isError) { 
+                FacesContext.getCurrentInstance().addMessage("msj", new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), ""));
+                FacesContext.getCurrentInstance().validationFailed();
+            }
+        }
 
+    }
+    
+    // Determina si los datos son validos en el formulario
+    public void isValid() throws Exception { 
+        isError = false;
+        
+        String dui = model.getDuiacc();
+        if(dui.length()!=10) { 
+            isError = true;
+            throw new Exception("El DUI es incorrecto");
+        }
     }
 }
     
