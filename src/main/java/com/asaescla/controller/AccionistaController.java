@@ -35,6 +35,21 @@ public class AccionistaController implements Serializable{
      // <editor-fold defaultstate="collapsed" desc="get/set">
     // Se puede autogenerar metodos get/set por medio de netbeans, click derecho, y selecionar "Insert Code", luego "Getter/Setter" y seleccionar los atributos que se necesaitan
 
+    public Accionistas getModel() {
+        return model;
+    }
+    
+    public void setModel(Accionistas model) {
+        this.model = model;
+    }
+     
+       public Boolean getIsEdit() {
+        return isEdit;
+    }
+
+       public void setIsEdit(Boolean isEdit) {
+        this.isEdit = isEdit;
+    }
     public AccionistasFacadeLocal getFacadeaccionistas() {
         return facadeaccionistas;
     }
@@ -49,22 +64,6 @@ public class AccionistaController implements Serializable{
 
     public void setList_DataObject(List<Accionistas> list_DataObject) {
         this.list_DataObject = list_DataObject;
-    }
-
-    public Accionistas getModel() {
-        return model;
-    }
-
-    public void setModel(Accionistas model) {
-        this.model = model;
-    }
-     
-    public Boolean getIsEdit() {
-        return isEdit;
-    }
-
-    public void setIsEdit(Boolean isEdit) {
-        this.isEdit = isEdit;
     }
 
     // </editor-fold>
@@ -116,7 +115,7 @@ public class AccionistaController implements Serializable{
     }
     
     // Evento click para abrir la modal, en modo agregar nuevo registro
-    public void onClickOpenModelNewAccionista() {
+    public void onClickOpenModelNewAccionista2() {
         try { 
             isEdit = false;
             model = new Accionistas();

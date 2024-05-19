@@ -15,21 +15,21 @@
             
             <p:commandButton value="Nuevo" 
                              update=":message" 
-                             actionListener="#{prueba.onClickOpenModelNewPrueba()}"
+                             actionListener="#{accionistas.onClickOpenModelNewAccionista2()}"
                              oncomplete="PF('myForm').show()"
                              style="margin-right:20px;" 
                              styleClass="btn-teal" />
             <!--La vista ocupa el motor de primefaces, usted puede ir a la pagina web para ver los ejemplos, y copiarlos, tal como hice-->
-            <p:dataTable var="item" value="#{prueba.list_DataObject}">
+            <p:dataTable var="item" value="#{accionnista.list_DataObject}">
                 <!--item es una variables de vista, con ella podemos acceder a los miembros de la clase del tipo de item que forma la lista-->
                 <p:column headerText="Codigo">
-                    <h:outputText value="#{item.id}" />
+                    <h:outputText value="#{item.idaccionistas}" />
                 </p:column>
-                <p:column headerText="Nombre">
-                    <h:outputText value="#{item.nombre}" />
+                <p:column headerText="Nombres">
+                    <h:outputText value="#{item.nombreacc}" />
                 </p:column>
-                <p:column headerText="Apellido">
-                    <h:outputText value="#{item.apellido}" />
+                <p:column headerText="Apellidos">
+                    <h:outputText value="#{item.apellidoacc}" />
                 </p:column>
                 <p:column headerText="Acciones">
                     <!--Tal como esta, se eliminara en la BDy se mostrar el mensaje, pero en la vista no se actualizara-->
@@ -39,12 +39,12 @@
                     <!--Aparte de eso necesitamos eliminar el item de la lista-->
                     <p:commandButton value="Eliminar" 
                                      update=":message :datos" 
-                                     actionListener="#{prueba.onClickDeletePrueba(item)}"
+                                     actionListener="#{accionistas.onClickDeleteAccionista(item)}"
                                      style="margin-right:20px;" 
                                      styleClass="btn-danger" />
                     <p:commandButton value="Modificar" 
                                      update=":message :myForm" 
-                                     actionListener="#{prueba.onClickOpenModelEditPrueba(item)}"
+                                     actionListener="#{accionistas.onClickOpenModelEditAccionista(item)}"
                                      oncomplete="PF('myForm').show()"
                                      style="margin-right:20px;" 
                                      styleClass="btn-primary" />
@@ -56,15 +56,31 @@
         <p:dialog header="Formulario" widgetVar="myForm" modal="true" width="800">
             <h:form id="myForm">
                 <h:outputLabel value="Nombre: " />
-                <p:inputText value="#{prueba.model.nombre}" />
+                <p:inputText value="#{accionistas.model.nombreacc}" />
                 
                 <h:outputLabel value="Apellido: " />
-                <p:inputText value="#{prueba.model.apellido}" />
+                <p:inputText value="#{accionistas.model.apellidoacc}" />
+                
+                <h:outputLabel value="Número de Dui: " />
+                <p:inputText value="#{accionistas.model.duiacc}" />
+                
+                <h:outputLabel value="Genero: " />
+                <p:inputText value="#{accionistas.model.genero}" />
+                
+                <h:outputLabel value="Fecha de Nacimiento: " />
+                <p:inputText value="#{accionistas.model.fechanac}" />
+                
+                <h:outputLabel value="Dirección: " />
+                <p:inputText value="#{accionistas.model.direccionacc}" />
+                
+                <h:outputLabel value="Fecha de Registro: " />
+                <p:inputText value="#{accionistas.model.fecharegistro}" />
+                
                 
                 <p:panelGrid columns="2">
                     <p:commandButton value="Procesar" 
                                      update=":myForm :datos" 
-                                     actionListener="#{prueba.onClickProcessPrueba()}"
+                                     actionListener="#{accionistas.onClickProcessAccionista()}"
                                      oncomplete="PF('myForm').hide()"
                                      style="margin-right:20px;" 
                                      styleClass="btn-primary" />
