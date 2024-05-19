@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ul class="sidebar-menu tree" data-widget="tree">
+        <li>
+            <a href="#">
+                <i class="fa fa-home"></i>
+                <span>MENU</span>
+            </a>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>MENU 2</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <p:link outcome="index.xhtml">
+                        <i class="fa fa-bars"></i>
+                        <span>Sub MENU</span>
+                    </p:link>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</ui:composition>

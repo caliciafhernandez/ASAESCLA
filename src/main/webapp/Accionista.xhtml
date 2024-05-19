@@ -1,0 +1,97 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                template="#{layoutMB.template}">
+    <ui:define name="body">
+        
+        <!--Se deben encerar en form para utilizar AJAX, es decir actualizaciones que solo se requieran en un parte de la pagina, y no toda-->
+        <h:form id="message">
+            <!--p:growl servira para mostrar mensajes de "Se creo correctamento" o "No se creo correctamente"-->
+            <p:growl id ="msj"/> 
+        </h:form>
+        
+        <h:form id="datos">
+            
+            <p:commandButton value="Nuevo" 
+                             update=":message" 
+                             actionListener="#{accionistas.onClickOpenModelNewAccionista()}"
+                             oncomplete="PF('myForm').show()"
+                             style="margin-right:20px;" 
+                             styleClass="btn-teal" />
+            <!--La vista ocupa el motor de primefaces, usted puede ir a la pagina web para ver los ejemplos, y copiarlos, tal como hice-->
+            <p:dataTable var="item" value="#{accionnista.list_DataObject}">
+                <!--item es una variables de vista, con ella podemos acceder a los miembros de la clase del tipo de item que forma la lista-->
+                <p:column headerText="Codigo">
+                    <h:outputText value="#{item.idaccionistas}" />
+                </p:column>
+                <p:column headerText="Nombres">
+                    <h:outputText value="#{item.nombreacc}" />
+                </p:column>
+                <p:column headerText="Apellidos">
+                    <h:outputText value="#{item.apellidoacc}" />
+                </p:column>
+                <p:column headerText="Acciones">
+                    <!--Tal como esta, se eliminara en la BDy se mostrar el mensaje, pero en la vista no se actualizara-->
+                    <!--el atributo update, le ayuda a actualizar la vista, porque solo le dijimos que actualice el form con id "message", solo este se actualizo-->
+                    <!--al agregar el form "datos" se actualizara la tabla, ya que esta dentro de dicho form-->
+                    <!--Los navegadores guardan el cache, aveces sera necesario hacer run y luego borrar el cache del navegador, o entrar en modo incognito del navegador-->
+                    <!--Aparte de eso necesitamos eliminar el item de la lista-->
+                    <p:commandButton value="Eliminar" 
+                                     update=":message :datos" 
+                                     actionListener="#{accionistas.onClickDeleteAccionista(item)}"
+                                     style="margin-right:20px;" 
+                                     styleClass="btn-danger" />
+                    <p:commandButton value="Modificar" 
+                                     update=":message :myForm" 
+                                     actionListener="#{accionistas.onClickOpenModelEditAccionista(item)}"
+                                     oncomplete="PF('myForm').show()"
+                                     style="margin-right:20px;" 
+                                     styleClass="btn-primary" />
+                    <!--Se debe indicar a la vista que actualice la modal, para ver los datos en el formulario al hacer click en modificar-->
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        
+        <p:dialog header="Formulario" widgetVar="myForm" modal="true" width="800">
+            <h:form id="myForm">
+                <h:outputLabel value="Nombre: " />
+                <p:inputText value="#{accionistas.model.nombreacc}" />
+                
+                <h:outputLabel value="Apellido: " />
+                <p:inputText value="#{accionistas.model.apellidoacc}" />
+                
+                <h:outputLabel value="Número de Dui: " />
+                <p:inputText value="#{accionistas.model.duiacc}" />
+                
+                <h:outputLabel value="Genero: " />
+                <p:inputText value="#{accionistas.model.genero}" />
+                
+                <h:outputLabel value="Fecha de Nacimiento: " />
+                <p:inputText value="#{accionistas.model.fechanac}" />
+                
+                <h:outputLabel value="Dirección: " />
+                <p:inputText value="#{accionistas.model.direccionacc}" />
+                
+                <h:outputLabel value="Fecha de Registro: " />
+                <p:inputText value="#{accionistas.model.fecharegistro}" />
+                
+                
+                <p:panelGrid columns="2">
+                    <p:commandButton value="Procesar" 
+                                     update=":myForm :datos" 
+                                     actionListener="#{accionistas.onClickProcessAccionista()}"
+                                     oncomplete="PF('myForm').hide()"
+                                     style="margin-right:20px;" 
+                                     styleClass="btn-primary" />
+                    <p:commandButton value="Cancelar" 
+                                     update=":myForm :datos" 
+                                     oncomplete="PF('myForm').hide()"
+                                     style="margin-right:20px;" 
+                                     styleClass="btn-danger" />
+                </p:panelGrid>
+                <!--oncomplete="PF('myForm').hide()" oculta la modal-->
+            </h:form>
+        </p:dialog>  
+    </ui:define>
+</ui:composition>
