@@ -15,8 +15,7 @@
             
             <p:commandButton value="Nuevo" 
                              update=":message" 
-                             actionListener="#{accionistas.onClickOpenModelNewAccionista2()}"
-                             oncomplete="PF('myForm').show()"
+                             actionListener="#{accionnista.onClickOpenModelNewAccionista2()}"
                              style="margin-right:20px;" 
                              styleClass="btn-teal" />
             <!--La vista ocupa el motor de primefaces, usted puede ir a la pagina web para ver los ejemplos, y copiarlos, tal como hice-->
@@ -57,7 +56,7 @@
             <h:form id="myForm">
                 <h:outputLabel value="Nombre: " />
                 <p:inputText value="#{accionistas.model.nombreacc}" />
-                
+
                 <h:outputLabel value="Apellido: " />
                 <p:inputText value="#{accionistas.model.apellidoacc}" />
                 
