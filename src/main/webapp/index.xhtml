@@ -2,9 +2,15 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                template="#{layoutMB.template}">
+                template="#{layoutMB.template}"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="body">
-        
+        <style type="text/css">
+            .p-datepicker input {
+                width: 100%
+            }
+        </style>
+       
         <!--Se deben encerar en form para utilizar AJAX, es decir actualizaciones que solo se requieran en un parte de la pagina, y no toda-->
         <h:form id="message">
             <!--p:growl servira para mostrar mensajes de "Se creo correctamento" o "No se creo correctamente"-->
@@ -60,29 +66,33 @@
                     layout="grid" styleClass="ui-panelgrid-blank">
 
                 <h:outputLabel value="Nombre: " />
-                <p:inputText value="#{accionista.model.nombreacc}" label="Nombre" required="true"/>
+                <p:inputText value="#{accionista.model.nombreacc}" label="Nombre" required="true" style="width: 100%"/>
 
                 <h:outputLabel value="Apellido: " />
-                <p:inputText value="#{accionista.model.apellidoacc}" label="Apellido:" required="true" />
+                <p:inputText value="#{accionista.model.apellidoacc}" label="Apellido:" required="true" style="width: 100%" />
                 
                 <h:outputLabel value="Número de Dui: " />
-                <p:inputText value="#{accionista.model.duiacc}" label="DUI" required="true"/>
+                <p:inputText value="#{accionista.model.duiacc}" label="DUI" required="true" style="width: 100%"/>
                 
                 <h:outputLabel value="Genero: " />
-                <p:inputText value="#{accionista.model.genero}" label="Genero" required="true"/>
+                <p:selectOneMenu value="#{accionista.model.genero}" label="Genero" required="true" style="width: 100%"
+                                 filter="true" filterMatchMode="contains" >
+                    <f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+                    <f:selectItem itemLabel="Femenino" itemValue="Femenino"/>
+                </p:selectOneMenu>
                 
                 <h:outputLabel value="Fecha de Nacimiento: " />
-                <p:datePicker yearNavigator="true" label="Fecha de Nacimiento" required="true"
+                <p:datePicker yearNavigator="true" label="Fecha de Nacimiento" required="true" style="width: 100%"
                               value="#{accionista.model.fechanac}"
                               pattern="dd-MM-yyyy"
                               showIcon="true" monthNavigator="true" readonlyInput="true" 
                               showButtonBar="true" autocomplete="false"
                               />
                 <h:outputLabel value="Dirección: " />
-                <p:inputText value="#{accionista.model.direccionacc}" label="Dirección" required="true"/>
+                <p:inputText value="#{accionista.model.direccionacc}" label="Dirección" required="true" style="width: 100%"/>
                 
                 <h:outputLabel value="Fecha de Registro: " />
-                <p:datePicker yearNavigator="true" label="Fecha de Registro" required="true" readonly="true"
+                <p:datePicker yearNavigator="true" label="Fecha de Registro" required="true" readonly="true" style="width: 100%"
                               value="#{accionista.model.fecharegistro}"
                               pattern="dd-MM-yyyy" showOnFocus="false"
                               showIcon="false" monthNavigator="true" readonlyInput="true" 
